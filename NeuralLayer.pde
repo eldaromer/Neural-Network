@@ -4,6 +4,9 @@ public class NeuralLayer {
   private NeuralLayer previous = null;
   private InputLayer in = null;
   private Neuron[] neurons;
+  private int neuronScale;
+  private int layerScale;
+  private int position;
   
   public NeuralLayer (int nmbrOfNrns, NeuralLayer prev) {
     numberOfNeurons = nmbrOfNrns;
@@ -36,12 +39,42 @@ public class NeuralLayer {
     }
   }
   
+  public int getNumberOfNeurons () {
+    return numberOfNeurons;
+  }
+  
+  public int getNeuronScale() {
+    return neuronScale;
+  }
+  
   public double[] getOutputs () {
     double[] temp = new double[numberOfNeurons];
     for (int i = 0; i < neurons.length; i++) {
       temp[i] = neurons[i].getOutput();
     }
     return temp;
+  }
+  
+  public void display (int nmbrOfLyrs, int position) {
+    layerScale = width/(nmbrOfLyrs+3);
+    neuronScale = height/(neurons.length+1);
+    this.position = position;
+    
+    for (int i = 0; i < neurons.length; i++) {
+      neurons[i].display(layerScale*(position+2), neuronScale*(i+1), layerScale);
+    }
+    
+    
+    
+  }
+  
+  public void displayEllipses() {
+    fill(0);
+    noStroke();
+    for (int i = 0; i < neurons.length; i++) {
+      ellipse(layerScale*(position+2), neuronScale*(i+1), 50, 50);
+      
+    }
   }
   
 }

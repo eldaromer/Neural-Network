@@ -1,12 +1,14 @@
 NeuralNet nn;
-int hiddenLayers = 3;
-int neuronsInLayer = 3;
-double[] inputs = {3.0, 5.0};
-int numberOfOutputs = 2;
+int[] neuronsInLayer = {5, 2, 3, 6, 1};
+double[] inputs = {3.0, 5.0, 2.0, 8.0};
+int numberOfOutputs = 10;
 double[] outputs;
+double[] softMaxed;
+boolean initiated = false;
 
 public void setup () {
-  size(1000, 500);
+  size(1500, 800);
+  surface.setResizable(true);
   
   print("Initiating Neural Network with values: [");
   for (int i = 0; i < inputs.length; i++) {
@@ -19,11 +21,12 @@ public void setup () {
   
   println("]");
   
-  NeuralNet nn = new NeuralNet(hiddenLayers, neuronsInLayer, inputs, numberOfOutputs);
+  nn = new NeuralNet(neuronsInLayer, inputs, numberOfOutputs);
   
   nn.calc();
   
   outputs = nn.getOutputs();
+  softMaxed = nn.getSoftMaxedOutputs();
   
   print("Neural Network Output: [");
   for (int i = 0; i < outputs.length; i++) {
@@ -36,8 +39,20 @@ public void setup () {
   
   println("]");
   
+  print("Neural Network SoftMaxed Output: [");
+  for (int i = 0; i < softMaxed.length; i++) {
+    if (i != softMaxed.length-1) {
+      print(""+ softMaxed[i] + ", ");
+    } else {
+      print(softMaxed[i]);
+    }
+  }
+  
+  println("]");
+  
 }
 
 public void draw () {
-  background(255);
+  background(#ffd1dc);
+  nn.display();
 }

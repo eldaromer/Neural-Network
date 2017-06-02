@@ -4,4 +4,10 @@ public class OutputLayer extends NeuralLayer{
     super(nmbrOfNrns, n);
   }
   
+  public double[] getSoftMaxedOutputs() {
+    double[] temp = getOutputs();
+    
+    return temp;
+  }
+  
 }
