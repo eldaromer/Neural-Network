@@ -38,9 +38,27 @@ public class Neuron {
       summed += inputs[i]*weights[i];
     }
     
-    output = sigmoid(summed);
+    output = Math_Functions.sigmoid(summed);
     //println(output);
     
+  }
+  
+  public ArrayList<Double> getWeights() {
+    
+    ArrayList<Double> temp = new ArrayList<Double>();
+    
+    for (int i = 0; i < weights.length; i++) {
+      temp.add(weights[i]);
+    }
+    
+    return temp;
+    
+  }
+  
+  public void setWeights(ArrayList<Double> temp) {
+    for (int i = 0; i < weights.length; i++) {
+      weights[i] = temp.get(i);
+    }
   }
   
   public void display (int x, int y, int layerScale) {
@@ -72,14 +90,9 @@ public class Neuron {
     return ColorTools.hsvToRgb((float)weight, 1.0, .5);
   }
   
-  public double sigmoid(double unactivated) {
-    double temp = 1;
-    temp/=(1+Math.exp(-1*unactivated));
-    return temp;
-  }
+  
   
   public double getOutput() {
-    println(output);
     return output;
   }
   

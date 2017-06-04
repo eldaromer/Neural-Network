@@ -55,6 +55,24 @@ public class NeuralLayer {
     return temp;
   }
   
+  public ArrayList<ArrayList<Double>> getWeights() {
+    ArrayList<ArrayList<Double>> temp = new ArrayList<ArrayList<Double>>();
+    
+    for (int i = 0; i < neurons.length; i++) {
+      temp.add(neurons[i].getWeights());
+    }
+    
+    return temp;
+  }
+  
+  public void setWeights(ArrayList<ArrayList<Double>> temp) {
+    
+    for (int i = 0; i < neurons.length; i++) {
+      neurons[i].setWeights(temp.get(i));
+    }
+    
+  }
+  
   public void display (int nmbrOfLyrs, int position) {
     layerScale = width/(nmbrOfLyrs+3);
     neuronScale = height/(neurons.length+1);
@@ -63,9 +81,6 @@ public class NeuralLayer {
     for (int i = 0; i < neurons.length; i++) {
       neurons[i].display(layerScale*(position+2), neuronScale*(i+1), layerScale);
     }
-    
-    
-    
   }
   
   public void displayEllipses() {

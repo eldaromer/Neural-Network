@@ -1,9 +1,5 @@
 public static class ColorTools {
   
-  public ColorTools () {
-    
-  }
-  
   public static String hsvToRgb(float hue, float saturation, float value) {
 
     int h = (int)(hue * 6);

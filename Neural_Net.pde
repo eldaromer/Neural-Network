@@ -1,10 +1,11 @@
 NeuralNet nn;
-int[] neuronsInLayer = {5, 2, 3, 6, 1};
+int[] neuronsInLayer = {5, 5, 5};
 double[] inputs = {3.0, 5.0, 2.0, 8.0};
-int numberOfOutputs = 10;
+int numberOfOutputs = 3;
 double[] outputs;
 double[] softMaxed;
 boolean initiated = false;
+ArrayList<ArrayList<ArrayList<Double>>> temp;
 
 public void setup () {
   size(1500, 800);
@@ -50,9 +51,36 @@ public void setup () {
   
   println("]");
   
+  temp = new ArrayList<ArrayList<ArrayList<Double>>>();
+  
+  for (int i = 0; i < neuronsInLayer.length; i++) {
+    temp.add(new ArrayList<ArrayList<Double>>());
+    for (int j = 0; j < neuronsInLayer[i]; j++) {
+      temp.get(i).add(new ArrayList<Double>());
+      if (i != 0) {
+        for (int k = 0; k < neuronsInLayer[i-1]; k++) {
+          temp.get(i).get(j).add(new Double(0.5));
+        }
+      } else {
+        for (int k = 0; k < inputs.length; k++) {
+          temp.get(i).get(j).add(new Double(0.5));
+        }
+      }
+    }
+  }
+  
+  temp.add(new ArrayList<ArrayList<Double>>());
+  for (int j = 0; j < numberOfOutputs; j++) {
+    temp.get(temp.size()-1).add(new ArrayList<Double>());
+    for (int k = 0; k < neuronsInLayer[neuronsInLayer.length-1]; k++) {
+      temp.get(temp.size()-1).get(j).add(new Double(0.5));
+    }
+  }
+  
 }
 
 public void draw () {
   background(#ffd1dc);
   nn.display();
+  nn.setWeights(temp);
 }

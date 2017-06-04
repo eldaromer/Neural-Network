@@ -7,7 +7,7 @@ public class OutputLayer extends NeuralLayer{
   public double[] getSoftMaxedOutputs() {
     double[] temp = getOutputs();
     
-    return temp;
+    return Math_Functions.softmax(temp);
   }
   
 }
